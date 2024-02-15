@@ -1,29 +1,63 @@
-import { Injectable } from '@nestjs/common';
-import { CreateItemDto } from './dto/create-item.dto';
-import { UpdateItemDto } from './dto/update-item.dto';
+// src/items/items.service.ts
+
+import { Injectable, Body, NotFoundException } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
+import { ItemDto } from './dto/item.dto';
+import { UpdateItemDto } from './dto/update-item.dto';
 
 @Injectable()
 export class ItemsService {
   constructor(private prisma: PrismaService) { }
-  
-  create(createItemDto: CreateItemDto) {
-    return 'This action adds a new item';
+
+
+  public async findAll() {
+    const result = await this.prisma.items.findMany();
+    return result
   }
 
-  findAll() {
-    return `This action returns all items`;
+  public async createItems(items: ItemDto[]): Promise<ItemDto[]> {
+    if (items && items.length > 0) {
+      await this.prisma.items.createMany({
+        data: items,
+      });
+
+      // After creation, retrieve the newly created items
+      const newItems = await this.prisma.items.findMany({});
+
+      return newItems;
+    }
+    return [];
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} item`;
+  public async updateItems(items: UpdateItemDto[]): Promise<UpdateItemDto[]> {
+    const promises = items.map(async (item) => {
+      const existingItem = await this.prisma.items.findUnique({
+        where: { id: item.id },
+      });
+
+      if (!existingItem) {
+        throw new NotFoundException(`Item with id ${item.id} not found`);
+      }
+
+      return this.prisma.items.update({
+        where: { id: item.id },
+        data: item,
+      });
+    });
+
+    return Promise.all(promises);
   }
 
-  update(id: number, updateItemDto: UpdateItemDto) {
-    return `This action updates a #${id} item`;
-  }
+  public async deleteItems(itemIds: number[]): Promise<number[]> {
+    if (itemIds && itemIds.length > 0) {
+      await this.prisma.items.deleteMany({
+        where: {
+          id: { in: itemIds },
+        },
+      });
 
-  remove(id: number) {
-    return `This action removes a #${id} item`;
+      return itemIds;
+    }
+    return [];
   }
 }

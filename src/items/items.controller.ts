@@ -1,34 +1,46 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
 import { ItemsService } from './items.service';
-import { CreateItemDto } from './dto/create-item.dto';
+import { ItemDto } from './dto/item.dto';
 import { UpdateItemDto } from './dto/update-item.dto';
 
 @Controller('items')
 export class ItemsController {
-  constructor(private readonly itemsService: ItemsService) {}
+  constructor(private readonly itemsService: ItemsService) { }
 
-  @Post()
-  create(@Body() createItemDto: CreateItemDto) {
-    return this.itemsService.create(createItemDto);
-  }
+  @Post('manage')
+  async manageItems(@Body() itemsData: ItemDto[]) {
 
-  @Get()
-  findAll() {
-    return this.itemsService.findAll();
-  }
+    let createDataList = [];
+    let updateDataList = [];
+    const allData = await this.itemsService.findAll();
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.itemsService.findOne(+id);
-  }
+    console.log(itemsData)
+    itemsData.forEach((item) => {
+      if (!item.id) {
+        createDataList.push(item);
+      } else {
+        updateDataList.push(item);
+      }
+    });
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateItemDto: UpdateItemDto) {
-    return this.itemsService.update(+id, updateItemDto);
-  }
 
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.itemsService.remove(+id);
+    // Create a Set of IDs from array2 for faster lookups
+    const idSet = new Set(updateDataList.map(item => item.id));
+
+
+    // Remove elements from array1 based on the common ID in array2
+    const deleteData = allData.filter(item => !idSet.has(item.id));
+
+    const deleteDataList = new Set(deleteData.map(item => item.id));
+
+    const createdItems = await this.itemsService.createItems(createDataList);
+    const updatedItems = await this.itemsService.updateItems(updateDataList);
+    const deletedItemIds = await this.itemsService.deleteItems([...deleteDataList]);
+
+    return {
+      createdItems,
+      updatedItems,
+      deletedItemIds,
+    };
   }
 }
