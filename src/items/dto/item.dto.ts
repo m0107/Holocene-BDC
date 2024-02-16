@@ -4,13 +4,15 @@ import { IsString, IsInt, IsBoolean, IsOptional, IsPositive, IsNotEmpty } from '
 
 export class ItemDto {
 
-    @IsInt()
-    @IsPositive()
     readonly id: number;
 
     @IsNotEmpty()
     @IsString()
     readonly name: string;
+
+    @IsNotEmpty()
+    @IsString()
+    readonly color: string;
 
     @IsNotEmpty()
     @IsInt()

@@ -2,6 +2,7 @@
 CREATE TABLE "Items" (
     "id" SERIAL NOT NULL,
     "name" TEXT NOT NULL,
+    "color" TEXT NOT NULL,
     "length" INTEGER NOT NULL,
     "width" INTEGER NOT NULL,
     "height" INTEGER NOT NULL,

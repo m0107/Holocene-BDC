@@ -4,6 +4,8 @@ import { Injectable, Body, NotFoundException } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { ItemDto } from './dto/item.dto';
 import { UpdateItemDto } from './dto/update-item.dto';
+import { ItemArrayDto } from './dto/item-array.dto';
+import { UpdateItemArrayDto } from './dto/update-item-array.dto';
 
 @Injectable()
 export class ItemsService {
@@ -15,22 +17,19 @@ export class ItemsService {
     return result
   }
 
-  public async createItems(items: ItemDto[]): Promise<ItemDto[]> {
-    if (items && items.length > 0) {
+  public async createItems(itemsArray: ItemArrayDto): Promise<ItemDto[]> {
+    if (itemsArray && itemsArray.items.length > 0) {
       await this.prisma.items.createMany({
-        data: items,
+        data: itemsArray.items,
       });
-
-      // After creation, retrieve the newly created items
       const newItems = await this.prisma.items.findMany({});
-
-      return newItems;
+      return newItems as ItemDto[];;
     }
     return [];
   }
 
-  public async updateItems(items: UpdateItemDto[]): Promise<UpdateItemDto[]> {
-    const promises = items.map(async (item) => {
+  public async updateItems(itemsArray: UpdateItemArrayDto): Promise<UpdateItemDto[]> {
+    const promises = itemsArray.items.map(async (item) => {
       const existingItem = await this.prisma.items.findUnique({
         where: { id: item.id },
       });
