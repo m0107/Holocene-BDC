@@ -25,10 +25,3 @@ async function bootstrap() {
   await app.listen(3000);
 }
 bootstrap();
-
-
-// if (error instanceof BadRequestException) {
-//   const validationErrors = error.getResponse()['message'];
-//   // Extract and handle validation error messages here
-//   console.error('Validation errors:', validationErrors);
-// }
