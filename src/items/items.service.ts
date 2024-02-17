@@ -8,9 +8,7 @@ import { ItemDto } from './dto/item.dto';
 import { UpdateItemDto } from './dto/update-item.dto';
 import { ItemArrayDto } from './dto/item-array.dto';
 import { UpdateItemArrayDto } from './dto/update-item-array.dto';
-import { error } from 'console';
-import handle_errors from 'src/utilities/controllers_handlers/handle_errors';
-import { Prisma, PrismaClient } from '@prisma/client';
+
 @Injectable()
 export class ItemsService {
   constructor(private prisma: PrismaService) { }
@@ -26,9 +24,6 @@ export class ItemsService {
         const deletedItemIds = await this.deleteItems(itemIds, prisma);
         const updatedItems = await this.updateItems(updateItemsArray, prisma);
         const createdItems = await this.createItems(createItemsArray, prisma);
-
-
-        // Combine and return the results as needed
         return [...createdItems, ...updatedItems];
       });
 
@@ -51,8 +46,6 @@ export class ItemsService {
         await prisma.items.createMany({
           data: itemsArray.items,
         });
-
-        throw new HttpException("Test", HttpStatus.CONFLICT);
         newItems = await prisma.items.findMany({});
         return newItems;
       }
