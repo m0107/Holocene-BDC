@@ -12,11 +12,6 @@ operation.
 $ npm install
 ```
 
-## Installation
-
-```bash
-$ npm install
-```
 
 ## Prerequisite Installation
 ```
