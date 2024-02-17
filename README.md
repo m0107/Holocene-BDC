@@ -53,6 +53,7 @@ $ npm run start:dev
 
 ```bash
 curl --location '43.204.92.175:3000/items/manage' \
+--header 'Content-Type: application/json' \
 --data '{
     "items": [
         {
