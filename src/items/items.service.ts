@@ -19,18 +19,15 @@ export class ItemsService {
     itemIds: number[]
   ): Promise<ItemDto[] | UpdateItemDto> {
     try {
-
-      const manageResult = await this.prisma.$transaction(async (prisma: PrismaService) => {
+      await this.prisma.$transaction(async (prisma: PrismaService) => {
         const deletedItemIds = await this.deleteItems(itemIds, prisma);
         const updatedItems = await this.updateItems(updateItemsArray, prisma);
         console.log("updatedItems", updatedItems);
         const createdItems = await this.createItems(createItemsArray, prisma);
         console.log("createdItems", createdItems);
-
-        return [...createdItems];
       });
-
-      return manageResult;
+      const result = await this.findAll();
+      return result;
     } catch (error) {
       console.error("Error in manage service", error);
       throw error
