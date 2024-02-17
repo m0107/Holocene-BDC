@@ -24,7 +24,7 @@ $ npm run start
 $ npm run start:dev
 ```
 
-##Single API path
+## Single API path
 ```/items/manage```
 
 
