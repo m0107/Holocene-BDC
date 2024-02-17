@@ -26,6 +26,43 @@ $ npm run start:dev
 $ npm run start:prod
 ```
 
+## Sample Curl Request
+
+```bash
+$ npm install
+curl --location 'localhost:3000/items/manage' \
+--header 'Content-Type: application/json' \
+--data '{
+    "items": [
+        {
+            
+            "name": "Item 22",
+            "length": 10,
+            "width": 5,
+            "height": 10,
+            "weight": 10,
+            "color": "red",
+            "qty": 20,
+            "stackable": true,
+            "tiltable": false
+        },
+        {
+            "id": 21,
+            "name": "update 21",
+            "length": 10,
+            "width": 5,
+            "height": 10,
+            "weight": 10,
+            "color": "red",
+            "qty": 20,
+            "stackable": true,
+            "tiltable": false
+        }      
+    ]
+}'
+```
+
+
 ## Test
 
 ```bash
