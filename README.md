@@ -22,7 +22,7 @@ $ npm run start
 
 # watch mode
 $ npm run start:dev
-
+```
 
 ##Single API path
 ```/items/manage```
