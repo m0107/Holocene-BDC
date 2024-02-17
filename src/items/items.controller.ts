@@ -3,7 +3,7 @@ import { ItemsService } from './items.service';
 import { ItemDto } from './dto/item.dto';
 import { UpdateItemDto } from './dto/update-item.dto';
 import { ItemArrayDto } from './dto/item-array.dto';
-import { sendError, sendSuccess } from 'src/utilities/controllers_handlers/handle_response';
+import { sendSuccess } from 'src/utilities/controllers_handlers/handle_response';
 import { Response } from 'express';
 
 @Controller('items')
