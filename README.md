@@ -12,9 +12,25 @@ operation.
 $ npm install
 ```
 
+## Installation
+
+```bash
+$ npm install
+```
+
+## Prerequisite Installation
+```
+node
+Nestjs-cli
+PrismaDocker  
+
 ## Running the app
 
 ```bash
+
+#Database
+$ docker-compose up
+
 # development
 $ npm run start
 
