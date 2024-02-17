@@ -3,8 +3,12 @@
 
 ## Description
 
-Design and implement a backend service that exposes an interface to create/update/delete records in a single
-operation.
+Holocene-BDC is a NestJS-based backend for managing items in a business-to-business distribution center. The application provides RESTful API endpoints for creating, updating, and managing items, as well as handling transactions involving multiple items.
+
+
+## Features
+
+Manage Items in Transactions: Perform multiple item operations (create, update, delete) within a single transaction.
 
 ## Installation
 
