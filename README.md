@@ -17,7 +17,8 @@ $ npm install
 ```
 node
 Nestjs-cli
-PrismaDocker  
+Prisma
+Docker  
 ```
 
 ## Running the app
