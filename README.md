@@ -5,7 +5,8 @@
 
 ## Description
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript repository.
+Design and implement a backend service that exposes an interface to create/update/delete records in a single
+operation.
 
 ## Installation
 
@@ -22,14 +23,14 @@ $ npm run start
 # watch mode
 $ npm run start:dev
 
-# production mode
-$ npm run start:prod
-```
+
+##Single API path
+```/items/manage```
+
 
 ## Sample Curl Request
 
 ```bash
-$ npm install
 curl --location 'localhost:3000/items/manage' \
 --header 'Content-Type: application/json' \
 --data '{
