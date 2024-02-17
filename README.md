@@ -94,6 +94,50 @@ curl --location '43.204.92.175:3000/items/manage' \
 ```
 
 
+## Sample Curl Request for req validation
+
+```bash
+curl --location '43.204.92.175:3000/items/manage' \
+--header 'Content-Type: application/json' \
+--data '{
+    "items": [
+        {
+            "name": "Item 80",
+            "width": 5,
+            "height": 10,
+            "weight": 10,
+            "color": "red",
+            "qty": 20,
+            "stackable": true,
+            "tiltable": false
+        },
+        {
+            "name": "update 81",
+            "length": 10,
+            "width": 5,
+            "height": 10,
+            "weight": 10,
+            "color": "red",
+            "qty": 20,
+            "stackable": true,
+            "tiltable": false
+        },
+        {
+            "name": "update 82",
+            "length": 10,
+            "width": 5,
+            "height": 10,
+            "weight": 10,
+            "color": "blue",
+            "qty": 20,
+            "stackable": true,
+            "tiltable": false
+        }
+    ]
+}'
+```
+
+
 ## License
 
 Nest is [MIT licensed](LICENSE).
