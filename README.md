@@ -18,6 +18,7 @@ $ npm install
 node
 Nestjs-cli
 PrismaDocker  
+```
 
 ## Running the app
 
