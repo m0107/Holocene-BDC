@@ -23,8 +23,11 @@ export class ItemsService {
       const manageResult = await this.prisma.$transaction(async (prisma: PrismaService) => {
         const deletedItemIds = await this.deleteItems(itemIds, prisma);
         const updatedItems = await this.updateItems(updateItemsArray, prisma);
+        console.log("updatedItems", updatedItems);
         const createdItems = await this.createItems(createItemsArray, prisma);
-        return [...createdItems, ...updatedItems];
+        console.log("createdItems", createdItems);
+
+        return [...createdItems];
       });
 
       return manageResult;

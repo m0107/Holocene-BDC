@@ -10,15 +10,7 @@ async function bootstrap() {
     new ValidationPipe({
       transformOptions: {
         strategy: 'exposeAll', // This makes all validation errors available in the response
-      },
-      exceptionFactory: (errors) => {
-
-        return new BadRequestException({
-          statusCode: 400,
-          message: 'Validation failed',
-          errors: ["Check Request body data"],
-        });
-      },
+      }
     }),
   );
 
