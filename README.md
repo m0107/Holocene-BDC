@@ -52,13 +52,11 @@ $ npm run start:dev
 ## Sample Curl Request
 
 ```bash
-curl --location 'localhost:3000/items/manage' \
---header 'Content-Type: application/json' \
+curl --location '43.204.92.175:3000/items/manage' \
 --data '{
     "items": [
         {
-            
-            "name": "Item 22",
+            "name": "Item 80",
             "length": 10,
             "width": 5,
             "height": 10,
@@ -69,8 +67,7 @@ curl --location 'localhost:3000/items/manage' \
             "tiltable": false
         },
         {
-            "id": 21,
-            "name": "update 21",
+            "name": "update 81",
             "length": 10,
             "width": 5,
             "height": 10,
@@ -79,7 +76,18 @@ curl --location 'localhost:3000/items/manage' \
             "qty": 20,
             "stackable": true,
             "tiltable": false
-        }      
+        },
+        {
+            "name": "update 82",
+            "length": 10,
+            "width": 5,
+            "height": 10,
+            "weight": 10,
+            "color": "blue",
+            "qty": 20,
+            "stackable": true,
+            "tiltable": false
+        }
     ]
 }'
 ```
